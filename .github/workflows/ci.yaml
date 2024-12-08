@@ -39,6 +39,14 @@ jobs:
     - name: Check diff
       run: git diff --exit-code
 
+  go_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cachix/install-nix-action@v30
+      - uses: actions/checkout@v4
+      - name: Run go test
+        run: nix run .#go -- test -v ./...
+
   # list-jobs:
   #   runs-on: ubuntu-latest
   #   outputs:

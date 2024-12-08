@@ -3,6 +3,14 @@
 
 package nixflake
 
+import (
+	"bytes"
+	"encoding/json"
+	"io"
+	"os"
+	"strings"
+)
+
 type Lock struct {
 	Nodes   map[string]LockNode `json:"nodes"`
 	Root    string              `json:"root"`
@@ -10,9 +18,9 @@ type Lock struct {
 }
 
 type LockNode struct {
-	Inputs   map[string]any   `json:"inputs"`
-	Locked   LockNodeLocked   `json:"locked"`
-	Original LockNodeOriginal `json:"original"`
+	Inputs   map[string]any    `json:"inputs,omitempty"`
+	Locked   *LockNodeLocked   `json:"locked,omitempty"`
+	Original *LockNodeOriginal `json:"original,omitempty"`
 }
 
 type LockNodeLocked struct {
@@ -32,8 +40,55 @@ type LockNodeOriginal struct {
 	Dir   string `json:"dir,omitempty"`
 	Id    string `json:"id,omitempty"`
 	Owner string `json:"owner,omitempty"`
-	Repo  string `json:"repo,omitempty"`
 	Ref   string `json:"ref,omitempty"`
+	Repo  string `json:"repo,omitempty"`
 	Type  string `json:"type,omitempty"`
 	Url   string `json:"url,omitempty"`
+}
+
+func Parse(from io.Reader) (*Lock, error) {
+	var lock Lock
+	if err := json.NewDecoder(from).Decode(&lock); err != nil {
+		return nil, err
+	}
+	return &lock, nil
+}
+
+func ParseFile(path string) (*Lock, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	return Parse(file)
+}
+
+func (l *Lock) String() string {
+	var (
+		b   strings.Builder
+		enc = json.NewEncoder(&b)
+	)
+	enc.SetIndent("", "  ")
+	err := enc.Encode(l)
+	if err != nil {
+		return err.Error()
+	}
+	return b.String()
+}
+
+var _ io.WriterTo = (*Lock)(nil)
+
+func (l *Lock) WriteTo(w io.Writer) (n int64, err error) {
+	var (
+		buf bytes.Buffer
+		enc = json.NewEncoder(&buf)
+	)
+
+	enc.SetIndent("", "  ")
+	err = enc.Encode(l)
+	if err != nil {
+		return 0, err
+	}
+
+	return buf.WriteTo(w)
 }
