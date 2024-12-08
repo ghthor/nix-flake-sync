@@ -49,6 +49,10 @@
               type = "app";
               program = "${selfPkgs.gomod2nix}/bin/gomod2nix";
             };
+            golangci-lint = {
+              type = "app";
+              program = "${pkgs.golangci-lint}/bin/golangci-lint";
+            };
             nix-flake-sync = {
               type = "app";
               program = "${selfPkgs.nix-flake-sync}/bin/nix-flake-sync";
@@ -89,8 +93,9 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
             go_1_23
-            self.packages.${system}.nix-flake-sync
             gomod2nix.packages.${system}.default
+            pkgs.golangci-lint
+            self.packages.${system}.nix-flake-sync
           ];
         };
       }
