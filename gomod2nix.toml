@@ -1,10 +1,16 @@
 schema = 4
-vendorModulesTxt = "# github.com/inconshreveable/mousetrap v1.1.0\n## explicit; go 1.18\ngithub.com/inconshreveable/mousetrap\n# github.com/spf13/cobra v1.8.1\n## explicit; go 1.15\ngithub.com/spf13/cobra\n# github.com/spf13/pflag v1.0.5\n## explicit; go 1.12\ngithub.com/spf13/pflag\n"
+vendorModulesTxt = "# github.com/google/go-cmp v0.6.0\n## explicit; go 1.13\ngithub.com/google/go-cmp/cmp\ngithub.com/google/go-cmp/cmp/internal/diff\ngithub.com/google/go-cmp/cmp/internal/flags\ngithub.com/google/go-cmp/cmp/internal/function\ngithub.com/google/go-cmp/cmp/internal/value\n# github.com/inconshreveable/mousetrap v1.1.0\n## explicit; go 1.18\ngithub.com/inconshreveable/mousetrap\n# github.com/shoenig/test v1.12.0\n## explicit; go 1.18\ngithub.com/shoenig/test/interfaces\ngithub.com/shoenig/test/internal/assertions\ngithub.com/shoenig/test/internal/constraints\ngithub.com/shoenig/test/internal/util\ngithub.com/shoenig/test/must\ngithub.com/shoenig/test/wait\n# github.com/spf13/cobra v1.8.1\n## explicit; go 1.15\ngithub.com/spf13/cobra\n# github.com/spf13/pflag v1.0.5\n## explicit; go 1.12\ngithub.com/spf13/pflag\n"
 
 [mod]
+  [mod."github.com/google/go-cmp"]
+    version = "v0.6.0"
+    hash = "sha256-qgra5jze4iPGP0JSTVeY5qV5AvEnEu39LYAuUCIkMtg="
   [mod."github.com/inconshreveable/mousetrap"]
     version = "v1.1.0"
     hash = "sha256-XWlYH0c8IcxAwQTnIi6WYqq44nOKUylSWxWO/vi+8pE="
+  [mod."github.com/shoenig/test"]
+    version = "v1.12.0"
+    hash = "sha256-2hwvR13beggAfDl43TwQ5bclmg/xmHaWFBqgCiqD0UQ="
   [mod."github.com/spf13/cobra"]
     version = "v1.8.1"
     hash = "sha256-yDF6yAHycV1IZOrt3/hofR+QINe+B2yqkcIaVov3Ky8="

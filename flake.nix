@@ -45,6 +45,10 @@
           in
           rec {
             default = nix-flake-sync;
+            go = {
+              type = "app";
+              program = "${go_1_23}/bin/go";
+            };
             gomod2nix = {
               type = "app";
               program = "${selfPkgs.gomod2nix}/bin/gomod2nix";
