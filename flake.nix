@@ -90,13 +90,12 @@
             '';
           };
         };
-        devShells.default = pkgs.mkShell {
-          nativeBuildInputs = [
-            go_1_23
-            gomod2nix.packages.${system}.default
-            pkgs.golangci-lint
-            self.packages.${system}.nix-flake-sync
-          ];
+        devShells.default = import ./shell.nix {
+          inherit pkgs;
+          inherit pkgs-unstable;
+          go = go_1_23;
+          gomod2nix = gomod2nix.packages.${system}.default;
+          inherit (self.packages.${system}) nix-flake-sync;
         };
       }
     );

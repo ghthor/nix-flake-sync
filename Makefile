@@ -4,3 +4,7 @@ LICENSE:
 
 gomod2nix.toml: go.mod go.sum
 	nix run '.#gomod2nix'
+
+.PHONY: fmt
+fmt: *.nix
+	nix fmt $^
