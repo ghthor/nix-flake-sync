@@ -11,7 +11,7 @@ on:
       - main
 
 jobs:
-  "nix fmt":
+  nix_fmt:
     runs-on: ubuntu-latest
     steps:
     - uses: cachix/install-nix-action@v30
@@ -21,7 +21,7 @@ jobs:
     - name: Check diff
       run: git diff --exit-code
 
-  "golangci-lint":
+  golangci-lint:
     runs-on: ubuntu-latest
     steps:
     - uses: cachix/install-nix-action@v30
@@ -29,7 +29,7 @@ jobs:
     - name: Run golangci-lint
       run: nix run .#golangci-lint -- run
 
-  "gomod2nix.toml":
+  gomod2nix_toml:
     runs-on: ubuntu-latest
     steps:
     - uses: cachix/install-nix-action@v30
