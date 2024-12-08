@@ -11,7 +11,7 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "nix-flake-lock",
+	Use:   "nix-flake-sync",
 	Short: "Keep the inputs between multiple flakes synchronized",
 	Long: `
 `,

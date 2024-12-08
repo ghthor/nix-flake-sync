@@ -1,4 +1,4 @@
-module github.com/ghthor/nix-flake-lock
+module github.com/ghthor/nix-flake-sync
 
 go 1.23.3
 

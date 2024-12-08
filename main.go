@@ -3,7 +3,7 @@
 
 package main
 
-import "github.com/ghthor/nix-flake-lock/cmd"
+import "github.com/ghthor/nix-flake-sync/cmd"
 
 func main() {
 	cmd.Execute()
