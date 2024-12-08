@@ -69,7 +69,21 @@
             pname = "nix-flake-sync";
             version = "0.0.1";
             pkg = ./.;
-            src = ./.;
+            src = pkgs.lib.cleanSourceWith {
+              filter =
+                path: type:
+                let
+                  inherit (pkgs.lib) hasSuffix;
+                  basename = builtins.baseNameOf path;
+                in
+                type == "directory"
+                || builtins.any (s: hasSuffix s basename) [
+                  ".go"
+                  "go.mod"
+                  "go.sum"
+                ];
+              src = ./.;
+            };
             go = go_1_23;
             modules = ./gomod2nix.toml;
             # subPackages = [ "." ];
