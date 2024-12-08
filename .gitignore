@@ -1,2 +1,3 @@
 **/result
 nix-flake-lock
+.direnv/
